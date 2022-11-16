@@ -1,0 +1,8 @@
+english 영어
+hello 안녕
+back 뒤
+idiot 바보
+confirm 확인하다
+prove 증명하다
+vocabulary 단어
+buy 사다
