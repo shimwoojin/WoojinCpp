@@ -19,8 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Test\Keyword\memory_allocation.cpp" />
-    <ClCompile Include="Test\Keyword\yujeong_reference.cpp" />
+    <ClCompile Include="Test\Keyword\push_and_emplace.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
