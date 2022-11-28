@@ -13,7 +13,7 @@ private:
 	static int testCount;
 };
 
-int Test::testCount = 0;	//.cpp
+int Test::testCount;	//.cpp
 
 int main()
 {
