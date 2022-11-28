@@ -19,7 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Test\Date\20221125.cpp" />
+    <ClInclude Include="TypeObject\TypeObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TypeObject\TypeObject.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
