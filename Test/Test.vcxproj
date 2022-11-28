@@ -19,10 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TypeObject\TypeObject.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="TypeObject\TypeObject.cpp" />
+    <ClCompile Include="Yujeong\yujeong_static.cpp" />
+    <ClCompile Include="Yujeong\yujeong_static2.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
