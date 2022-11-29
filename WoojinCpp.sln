@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voca", "Voca\Voca.vcxproj", "{B5DF2699-2300-4C79-88C0-5FA51B420535}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pattern", "Pattern\Pattern.vcxproj", "{074A87E0-D903-41B2-8164-EDD1C49BAD50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{B5DF2699-2300-4C79-88C0-5FA51B420535}.Release|x64.Build.0 = Release|x64
 		{B5DF2699-2300-4C79-88C0-5FA51B420535}.Release|x86.ActiveCfg = Release|Win32
 		{B5DF2699-2300-4C79-88C0-5FA51B420535}.Release|x86.Build.0 = Release|Win32
+		{074A87E0-D903-41B2-8164-EDD1C49BAD50}.Debug|x64.ActiveCfg = Debug|x64
+		{074A87E0-D903-41B2-8164-EDD1C49BAD50}.Debug|x64.Build.0 = Debug|x64
+		{074A87E0-D903-41B2-8164-EDD1C49BAD50}.Debug|x86.ActiveCfg = Debug|Win32
+		{074A87E0-D903-41B2-8164-EDD1C49BAD50}.Debug|x86.Build.0 = Debug|Win32
+		{074A87E0-D903-41B2-8164-EDD1C49BAD50}.Release|x64.ActiveCfg = Release|x64
+		{074A87E0-D903-41B2-8164-EDD1C49BAD50}.Release|x64.Build.0 = Release|x64
+		{074A87E0-D903-41B2-8164-EDD1C49BAD50}.Release|x86.ActiveCfg = Release|Win32
+		{074A87E0-D903-41B2-8164-EDD1C49BAD50}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

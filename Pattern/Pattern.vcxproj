@@ -18,11 +18,19 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="01Introduction\00_Introduction.cpp" />
+    <ClCompile Include="01Introduction\01_Introduction_2.cpp" />
+    <ClCompile Include="02DesignPattern\02_Command.cpp" />
+    <ClCompile Include="02DesignPattern\03_FlyWeight.cpp" />
+    <ClCompile Include="02DesignPattern\04_Observer.cpp" />
+    <ClCompile Include="02DesignPattern\05_ProtoType.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{a21ec9d7-3327-4ca4-8668-2acd3e2de090}</ProjectGuid>
-    <RootNamespace>Test</RootNamespace>
+    <ProjectGuid>{074a87e0-d903-41b2-8164-edd1c49bad50}</ProjectGuid>
+    <RootNamespace>Pattern</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

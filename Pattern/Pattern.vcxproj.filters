@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="02DesignPattern\02_Command.cpp" />
+    <ClCompile Include="02DesignPattern\03_FlyWeight.cpp" />
+    <ClCompile Include="02DesignPattern\04_Observer.cpp" />
+    <ClCompile Include="01Introduction\00_Introduction.cpp" />
+    <ClCompile Include="01Introduction\01_Introduction_2.cpp" />
+    <ClCompile Include="02DesignPattern\05_ProtoType.cpp" />
+  </ItemGroup>
+</Project>
