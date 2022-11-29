@@ -25,6 +25,8 @@
     <ClCompile Include="02DesignPattern\03_FlyWeight.cpp" />
     <ClCompile Include="02DesignPattern\04_Observer.cpp" />
     <ClCompile Include="02DesignPattern\05_ProtoType.cpp" />
+    <ClCompile Include="02DesignPattern\06_Singleton.cpp" />
+    <ClCompile Include="02DesignPattern\07_State.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
