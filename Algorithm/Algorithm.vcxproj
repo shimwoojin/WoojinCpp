@@ -19,8 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Stack\Stack.cpp" />
-    <ClCompile Include="Stack\StackWithList.cpp" />
+    <ClCompile Include="Queue\CircularQueue.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
