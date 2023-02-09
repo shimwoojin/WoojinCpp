@@ -1,0 +1,408 @@
+﻿
+/*
+
+
+1. 절자치향과 객체지향이 무엇인지, c++ 에서는 왜 객체지향을 사용하는지에 대해 서술하시오.
+- 절차지향은 함수단위, 객체지향은 (클래스 + 인스턴스)임
+- 객체지향의 3요소로 캡슐화, 상속, 다형성이 있고 이를 통해 코드의 재활용, 정보 은닉 등 유연한 코딩이 가능함
+- 객체 단위로 묶어서 데이터를 관리하기 때문에 유리한 것도 있음
+
+2. c++초기화 방법 세가지에 대해 서술하시오
+- copy, direct, uniform
+- int x = 10; 	//copy
+- int x(10); 	// direct
+- int x{10}; 	//uniform, 제일 엄격함(암시적 형변환 불가능)
+
+3. c의 malloc()와 c++의 new keyword의 차이점에 대해 서술하시오.
+- Plain Old Data 형식만을 지원하는 것은 malloc
+- new는 생성자를 지원함, malloc은 불가능
+- malloc은 realloc에 대해 강한 점이 있음, new는 불가능
+
+4. function overloading에 대해 서술하시오.
+- 같은 함수의 이름으로 다른 처리를 하고자 할 때 사용함
+- 오버로딩은 같은 함수의 이름을 사용함
+- 매개변수의 자료형 혹은 갯수를 달리함
+- 반환형은 오버로딩에 영향을 주지 않음
+
+5. function overriding에 대해 서술하시오.
+- 상속 관계에서 같은 반환형, 같은 함수 이름, 같은 매개변수를 사용하여 완전히 같은 함수에 대한 파생 클래스에서의 재정의
+- virtual 키워드를 통하여 업캐스팅, 다운캐스팅시에도 주인에 맞는 함수를 찾아주기 때문에 유연한 코드 작성 가능
+
+6. abstract class와 interface의 차이점과 사용이유에 대해 서술하시오
+- 둘다 인스턴스 생성이 불가능하다는 점은 같음
+- 상속에 사용하는 기반 클래스라는점은 같음
+- C++에서는 인터페이스의 경우 I키워드를 class 혹은 struct 앞에 붙여서 interface임을 명시함
+- interface의 함수들은 public에 정의
+- interface는 기능의 명세로 모든 함수가 가상함수이며 또한 순수가상함수이다 ( virtual, =0;) ( 함수에 대한 정의를 하지 않음)
+- interface는 멤버변수또한 가지지 않음
+- 정리하면 함수의 정의부가 있냐 없냐 + 멤버변수가 있냐 없냐 정도의 차이로 볼 수 있음
+
+7. deep copy와 shallow의 차이점과, deep copy를 구현했을때 정의되어야하는 class의 special member function이 무엇인지, 그리고 재정의 해야하는 이유에대해 서술하시오.
+- 얕은 복사와 깊은 복사는 주소의 복사이냐 혹은 원본의 복사이냐의 차이이다. 얕은 복사 = 주소, 깊은 복사 = 원본
+- copy constructor, copy operator가 재정의 되어야 함, 필요하다면 move, move operator또한 재정의
+- 객체의 복사가 이루어졌을 때 생성자에서 동적할당한 것이 있어 복사한 객체가 그것의 주소를 같이 가리키게 되면 객체가 delete 되는 순간에 같은 메모리를 두번 해제하게 되는
+double free의 문제가 발생할 수 있음
+- 또한 얕은 복사를 하여 같은 주소를 가리키게 되면 의도치 않은 데이터 변환이 이루어짐
+- 그렇기 때문에 생성자에서 동적할당을 해주었다면 항상 이것을 염두해야함 
+-> 주소의 복사가 아닌 값의 복사를 하는 깊은 복사를 복사생성자에서 재정의해주어야 함
+
+8. 다음 C++ casting operator들의 역활과 사용 이유에 대해 서술하시오.
+- static_cast, dynamic_cast, const_cast, reinterpret_cast
+- static_cast : 일반적인 형변환에 대해 명시적으로 사용하여야 할 때
+- dynamic_cast : RTTI의 형변환이 가능한지에 대한 체크가 필요할 때, ex) 클래스의 다운 캐스팅
+- const_cast : const성의 부여 혹은 제거
+- reinterpret_cast : 일반 자료형 -> 포인터 자료형, 포인터 자료형 -> 일반 자료형 등의 강제적 형변환이 필요할 때
+
+9. template function의 경우 prototype과 body가 항상 같은 file scope안에 존재 하여야 한다.그 이유가 무엇인지 서술하시오.
+- prototype과 body가 분리되어 있다면 실제 body에 대한 부분은 헤더가 추가되었다고 하여도 존재하지 않음
+- 예를 들어 template<typename T>에 대해 body에 들어있는 코드들에 대해 링크 타임에 찾을 수가 없음
+
+10. 다음 코드의 사용된 const의 각각의 의미에 대해 서술하시오
+
+
+class Test
+
+
+{
+
+
+public:
+
+
+
+const int* const DoSomething(const int i) const
+
+
+{
+
+
+int* ptr = new int;
+
+
+*ptr = i + num;
+
+
+return ptr;
+
+
+}
+
+
+
+private:
+
+
+int num;
+
+
+
+}
+
+- const int* const DoSomething(const int i) const
+1) const int* : 이 함수가 return한 ptr의 값을 허용하지 않겠다는 const
+2) int* const : 이 함수가 return한 ptr의 변경을 허용하지 않겠다는 const
+3) const int i : 함수 내에서 i의 값의 변경을 허용하지 않겠다는 const
+4) i) const : 함수 내에서 멤버 변수에 대한 변경을 허용하지 않겠다는 const
+
+11. c++ 한정자 constexpr에 대해 서술하시오
+- 상수성에 대하여만 const성을 붙여주겠다는 의미
+ex) constexpr int a = 10;	//되는 문법
+int b;
+const int a = b;	//되는 문법, b의 변환은 허용하지만 a의 값의 변경은 허용하지 않음, a의 값은 대입이 이루어지는 순간의 b값으로 고정
+
+constexpr c = b;	// error
+
+12. assert와 static_assert의 차이점이 무엇인지 구체적으로 예를 들어 서술하시오.
+- assert는 예외발생을 해주는 문법
+- assert()는 런타임에 확인 됨
+- static_assert()는 컴파일 타임때 체크 가능
+int z = 10;
+const int w = z;
+static_assert(w);	//불가능
+
+13. default parameter에 대해 서술하고, 사용시 발생할 수 있는 문제가 무엇인지, 그리고 같이 쓰지 말아햐 할 것이 무엇인지에 대해 서술하시오.
+- 매개변수를 넘겨줄 때 인자를 받지 않아도 기본값으로 쓸 값들을 매개변수에 미리 정의해 놓은 것
+- 맨 뒤에서부터 default parameter를 사용하여야 함
+- 오버로딩을 하였을 때 매개변수 3개 중에 2개를 default parameter를 정의했다면 매개변수가 1개인 함수와 모호한 상황이 발생할 수 있음
+
+
+14. polymorphism과 virtual function table에 대해 서술하시오
+- polymorphism이란 한글 뜻으로 다형성이고 하나의 구문이 다양한 의미를 가질수 있음을 뜻하는 C++의 객체지향 3요소중 하나임
+- 이것을 상속관계의 overriding된 함수에서 찾으라 하면 virtual 키워드를 통한 함수의 재정의는 다형성을 가지게 됨
+- 기반 클래스의 포인터 혹은 l-value reference로 업캐스팅되었을 때도 virtual 키워드가 적힌 객체는 자신이 재정의한 함수를 찾아가게 됨
+- virtual function table이란 overriding된 함수들에 대한 주소들의 배열이라고 생각하면 됨
+- runtime에 객체의 자료형에 따라 이 주소를 컴파일러가 잘 찾아주게 됨
+
+15. conversion constructor이 무엇인지, 그리고 발생할 수 있는 문제점과 해결 방법에 대해 구체적으로 서술하시오.
+- 매개변수가 하나인 생성자를 conversion constructor라고 부름
+- Test(float f) {} 라고 정의한 생성자가 매개변수가 int형인 것에 대해서도 암시적으로 float으로 변환하여 생성할 수 있기 때문에 의도하지 않은 프로그래밍이 될 수 있음
+- explicit 키워드를 통하여 이것을 방지할 수 있음
+
+16. 다섯가지 object relationship에 대해 서술하시오
+- composition : 특정 클래스가 멤버변수로 다른 클래스의 변수를 가지는 경우, part of
+- Aggregation : 특정 클래스가 멤버변수로 다른 클래스의 포인터형 변수를 가지는 경우, has a
+- Association : 특정 클래스가 다른 클래스를 매개변수로 사용하는 경우 ( 강한 커플링 ), uses a
+- Dependency : 특정 클래스가 다른 클래스를 함수의 body에서 잠시 선언하여 사용하는 경우 ( 약한 커플링 ), depend on
+- Inheritance : 기반 / 파생의 관계, is a
+
+
+17. 아래 코드의 주석을 보고 해당 operator를 작성하시오
+
+
+class Number
+
+
+{
+
+
+public:
+
+
+Number(int value = 0) : value(value) {}
+
+
+~Number() = defalut;
+
+
+
+// 1. prefix increment operator
+Number& operator++()
+{
+	++num;
+	return *this;
+}
+
+// 2. postfix increment operator
+Number& operator++(int)
+{
+	Number temp(num);
+	++(*this);
+	return temp;
+}
+
+
+// 3. type casting operator to cast to int*
+operator int*()
+{
+	return &(this->value);
+}
+
+
+private:
+
+
+int value = 0;
+
+
+}
+
+
+
+18. 다음의 코드를 보고 실행 결과가 무엇인지, 왜 그런 실행 결과가 나오는지 서술하시오.
+
+constructor
+copy constructor
+copy constructor
+
+-> 1,2에 대해선 당연한 결과
+-> Number num3 = num2; 는 복사대입연산자를 호출할 것 같으나 복사생성자를 호출함
+Number num3;
+num3 = num2; 일 경우에는 복사대입 연산자를 호출
+
+#include<iostream>
+
+class Number
+
+{
+
+public:
+
+Number(int value = 0) : value(value)
+
+{
+
+std::cout << "constructor" << std::endl;
+
+}
+
+
+Number(const Number& other)
+
+{
+
+std::cout << "copy_constructor" << std::endl;
+
+}
+
+
+Number& operator=(const Number& rhs)
+
+{
+
+std::cout << "copy_assignment_operator" << std::endl;
+
+}
+
+
+~Number() = default;
+
+
+private:
+
+int value = 0;
+
+};
+
+
+int main()
+
+{
+
+Number num1;
+
+Number num2(num1);
+
+Number num3 = num2;
+
+
+retrun 0;
+
+}
+
+
+
+
+
+19. L - Value Reference 와 R - Value Reference 가 무엇인지 서술하시오
+- l value reference는 자료형 오른쪽에 &를 붙여 사용,  r value reference는 자료형 오른쪽에 &&를 붙여 사용
+- l value reference는 기존의 자료형의 별명을 짓는다는 의미로 l value reference는 대입받은 값의 원본은 가짐
+- r value reference는 기존의 자료형의 move를 이동하는 것으로 대입받은 데이터에 대해 더 이상 사용하지 않겠다는 의미를 가짐
+
+
+20. 기본 생성자를 제외한 5가지의 special member function에 대해 서술하고 클래스 MyClass를 만든다고 할 때, 각각의 special member function의 prototype을 작성하시오
+
+
+1. 기본 생성자
+
+- 설명 : 객체를 생성할 때 입력받는 인자가 없을경우 호출되는 생성자
+
+- MyClass();
+
+
+2.MyClass(const MyClass& myclass);	//copy constructor
+
+
+3.MyClass(MyClass&& myclass);	//move constructor
+
+
+4.MyClass& operator=(const MyClass& myclass);
+
+
+5.MyClass& operator=(MyClass&& myclass) noexcept;
+
+
+6.~MyClass();
+
+
+21 multiple_inheritance에서 발생하는 diamond problem이 무엇인지, 그리고 해결 방법이 무엇인지 구체적으로 서술하시오.
+- 1세대의 클래스 a를 상속받은 b와 a를 상속받은 c가 있고 b와 c를 multiple inheritance한 d가 있을 때 이러한 상속을 diamond problem이라고 함
+- virtual 키워드를 통한 해결이 가능, 2세대가 상속할 때 1세대를 virtual로 만들어 상속  -> d는 이름없는 a객체를 하나만 가지게 됨
+
+22. RVO와 NRVO에 대해 서술하시오
+- Return Value Optimization
+- Named Return Value Optimization
+필요하지 않은 임시객체를 생성하지 않게 해주는 최적화 방법
+RVO는 return하는 객체가 이름이 없을 때 임시객체가 생성하지 않게 하는 것, debug/release 둘 다 지원
+NRVO는 return하는 객체가 이름이 있어 임시객체가 생성하지 않게 하는 것, debug x release o
+
+23. C++ container와 iterator에 대해 각각 구체적으로 서술하시오
+- template을 사용한 일반화 프로그래밍을 가능하게 해주는 C++이 지원하는 라이브러리인 STL의 3요소 중 2가지이다. 3요소는 container iterator algorithm
+- container란 자료형에 구애 받지 않고 데이터들을 관리할 수 있게 해주는 공간으로서 vector, list, map, set 등 각 컨테이너는 장단점이 명확함
+- iterator는 container에 대입된 데이터들의 포인터로서 동작하게 되는데 container의 관리에 유용함
+- .begin(), .end(), .rbegin(), .rend() 등 컨테이너의 시작주소, 끝주소 +1, 시작주소 - 1, 끝주소를 가리키는 iterator들은 반복문의 사용에 아주 좋음
+
+24. 다음 코드를 보고 문제점이 무엇인지, 해결방법이 무엇인지에 대해 서술하시오.
+
+- 파생 클래스의 소멸자가 호출되지 않음
+- 기반 클래스의 소멸자를 virtual키워드를 붙여 해결 가능
+
+class Base
+
+{
+
+public:
+
+Base() = default;
+
+~Base() = default;
+
+};
+
+
+class Derived : public Base
+
+{
+
+public:
+
+Derived() = default;
+
+~Derived() = default;
+
+};
+
+
+int main()
+
+{
+
+Base* derived = new Derived;
+
+
+delete derived;
+
+
+return 0;
+
+}
+
+
+25. 다음 코드를 보고 발생할 수 있는 risk가 무엇인지, 그리고 해결방법이 무엇인지 서술하시오.
+
+- 실제 배열에 -1값이 대입되어 있는 경우 인덱스의 범위를 벗어났는지에 대한 체크가 불가능함
+- assert를 통하여 debug모드에서 outofbound에 대한 체크를 할 수 있게 만들수 있음
+assert(index >=0);
+assert(index < 10);
+assert는 괄호안의 값이 참이면 무시하고 지나감(문제없음)
+
+class IntArray
+
+{
+
+public:
+
+int operator [] (const int& index)
+
+{
+
+if (index < 0 || index >= 10)
+
+return -1;
+
+
+return values[index];
+
+}
+
+
+private:
+
+int values[10];
+
+};
+
+*/
+
+
+
+﻿
