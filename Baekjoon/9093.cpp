@@ -31,30 +31,30 @@ int main()
 
 	for (int i = 0; i < num; i++)
 	{
-		while (*(sentences[i]) != '\0')
+		while (*sentences[i] != '\0')
 		{
 			while (*sentences[i] != ' ')
 			{
 				reverse.push(*sentences[i]);
-				(*sentences[i])++;
+				sentences[i]++;
 			}
 
-			while (reverse.empty() == false)
+			while (reverse.empty() != true)
 			{
-				*(sentences_result[i]) = reverse.top();
+				*sentences_result[i] = reverse.top();
 				reverse.pop();
-				(*sentences_result[i])++;
+				sentences_result[i]++;
 			}
 
-			*(sentences_result[i]) = ' ';
-			(*sentences_result[i])++;
+			*sentences_result[i] = ' ';
+			sentences_result[i]++;
 		}
 	}
 
 	//결과 출력
 	for (int i = 0; i < num; i++)
 	{
-		std::cout << sentences[i] << std::endl;
+		std::cout << sentences_result[i] << std::endl;
 	}
 
 
