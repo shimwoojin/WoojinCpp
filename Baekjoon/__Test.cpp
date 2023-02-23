@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <math.h>
+#include <stack>
 using namespace std;
 
 int main()
