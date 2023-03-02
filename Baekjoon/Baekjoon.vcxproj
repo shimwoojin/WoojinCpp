@@ -19,8 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="00_NoCategory\12100.cpp" />
-    <ClCompile Include="12_Recursion\24060.cpp" />
+    <ClCompile Include="13_BruteForce\2231.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
