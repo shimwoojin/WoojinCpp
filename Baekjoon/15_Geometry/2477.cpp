@@ -16,7 +16,7 @@ int main()
 	ios::sync_with_stdio(false);
 
 	//왼쪽 아래 파임		왼쪽 위에 파임		오른쪽 아래 파임		오른쪽 위에 파임
-	//423131			423231				423141				424231
+	//423131			424231				423131				424132
 
 	vector<pair<int, int>> vec;
 	vector<string> direction_vec;
@@ -50,14 +50,45 @@ int main()
 	}
 
 	int index;
+	struct pos
+	{
+		int x;
+		int y;
+	};
+	pos pos_;
 
 	for (int i = 0; i < direction_vec.size(); i++)
 	{
 		if (direction_vec[i] == "423131")
 		{
 			index = i;
+			pos_.x = -1;
+			pos_.y = -1;
+			break;
+		}
+		if (direction_vec[i] == "424231")
+		{
+			index = i;
+			pos_.x = -1;
+			pos_.y = +1;
+			break;
+		}
+		if (direction_vec[i] == "423131")
+		{
+			index = i;
+			pos_.x = +1;
+			pos_.y = -1;
+			break;
+		}
+		if (direction_vec[i] == "424132")
+		{
+			index = i;
+			pos_.x = +1;
+			pos_.y = +1;
+			break;
 		}
 	}
+
 
 	return 0;
 }
