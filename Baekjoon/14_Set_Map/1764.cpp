@@ -6,8 +6,8 @@
 #include <queue>
 #include <algorithm>
 #include <cstring>
-#include <map>
 #include <set>
+#include <map>
 using namespace std;
 
 int main()
@@ -15,18 +15,18 @@ int main()
 	cin.tie(NULL);
 	ios::sync_with_stdio(false);
 
-	set<string> set;
+	multiset<string> name;
+	vector<string> vec;
 
 	int n, m;
-	int count = 0;
 	cin >> n >> m;
 
 	for (int i = 0; i < n; i++)
 	{
 		string str;
 		cin >> str;
-		
-		set.insert(str);
+
+		name.insert(str);
 	}
 
 	for (int i = 0; i < m; i++)
@@ -34,11 +34,28 @@ int main()
 		string str;
 		cin >> str;
 
-		if (set.count(str) == 1)
-			++count;
+		name.insert(str);
 	}
 
-	cout << count;
+	int count = 0;
+
+	for (auto iter = name.begin(); iter != name.end(); iter++)
+	{
+		if (name.count(*iter) == 2)
+		{
+			vec.push_back(*iter);
+			++count;
+			++iter;
+		}
+	}
+
+	cout << count << "\n";
+
+	for (auto ele : vec)
+	{
+		cout << ele << "\n";
+	}
+
 
 	return 0;
 }

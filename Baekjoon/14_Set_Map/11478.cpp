@@ -15,8 +15,13 @@ int main()
 	cin.tie(NULL);
 	ios::sync_with_stdio(false);
 
-	
+	string str;
+	cin >> str;
 
+	for (int i = 0; i < str.size(); i++)
+	{
+		
+	}
 
 
 

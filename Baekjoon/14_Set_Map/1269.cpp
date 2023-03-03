@@ -6,39 +6,44 @@
 #include <queue>
 #include <algorithm>
 #include <cstring>
-#include <map>
 #include <set>
+#include <map>
 using namespace std;
+
+bool set_a[100000001];
+bool set_b[100000001];
 
 int main()
 {
 	cin.tie(NULL);
 	ios::sync_with_stdio(false);
 
-	set<string> set;
-
-	int n, m;
 	int count = 0;
+	int n, m;
 	cin >> n >> m;
 
 	for (int i = 0; i < n; i++)
 	{
-		string str;
-		cin >> str;
-		
-		set.insert(str);
+		int a;
+		cin >> a;
+
+		set_a[++a] = true;
 	}
 
 	for (int i = 0; i < m; i++)
 	{
-		string str;
-		cin >> str;
+		int b;
+		cin >> b;
 
-		if (set.count(str) == 1)
-			++count;
+		set_b[++b] = true;
 	}
 
-	cout << count;
+	for (int i = 0; i < 100000000; i++)
+	{
+		if (set_a[i] == true && set_b[i] == true) ++count;
+	}
+
+	cout << n + m - 2 * count;
 
 	return 0;
 }
