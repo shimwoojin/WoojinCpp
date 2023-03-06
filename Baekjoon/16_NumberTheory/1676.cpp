@@ -15,23 +15,32 @@ int main()
 	cin.tie(NULL);
 	ios::sync_with_stdio(false);
 
-	set<string> s;
-	string str;
-	cin >> str;
+	int n;
+	cin >> n;
 
-	for (int i = 0; i < str.size(); i++)
+	int n5 = 0, n2 = 0;
+
+	for (int i = 1; i <= n; i++)
 	{
-		string temp;
+		int temp = i;
 
-		for (int j = i; j < str.size(); j++)
+		while (true)
 		{
-			temp += str[j];
-
-			s.insert(temp);
+			if (temp % 5 == 0)
+			{
+				temp /= 5;
+				++n5;
+			}
+			else if (temp % 2 == 0)
+			{
+				temp /= 2;
+				++n2;
+			}
+			else break;
 		}
 	}
 
-	cout << s.size();
+	cout << std::min(n5, n2);
 
 	return 0;
 }

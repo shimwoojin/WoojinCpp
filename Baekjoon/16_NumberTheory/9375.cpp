@@ -15,23 +15,30 @@ int main()
 	cin.tie(NULL);
 	ios::sync_with_stdio(false);
 
-	set<string> s;
-	string str;
-	cin >> str;
+	int n;
+	cin >> n;
 
-	for (int i = 0; i < str.size(); i++)
+	for (int i = 0; i < n; i++)
 	{
-		string temp;
+		map<string, vector<string>> fashion;
+		set<string> type;
+		int m;
+		cin >> m;
 
-		for (int j = i; j < str.size(); j++)
+		for (int j = 0; j < m; j++)
 		{
-			temp += str[j];
+			string name, category;
+			cin >> name >> category;
 
-			s.insert(temp);
+			type.insert(category);
+			fashion[category].push_back(name);
 		}
+
+
 	}
 
-	cout << s.size();
+
+
 
 	return 0;
 }
