@@ -17,8 +17,17 @@ int main()
 	cin.tie(NULL);
 	ios::sync_with_stdio(false);
 
-	
+	vector<int> vec;
+	int k, n;
+	cin >> k >> n;
 
+	for (int i = 0; i < k; i++)
+	{
+		int a;
+		cin >> a;
+
+		vec.push_back(a);
+	}
 
 
 
