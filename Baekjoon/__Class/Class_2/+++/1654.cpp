@@ -12,26 +12,39 @@ using namespace std;
 
 typedef long long ll;
 
+int K, N, ans;
+int line[10001];
+int  maxi = 0;
+long long mid, high, low;
+
 int main()
 {
-	cin.tie(NULL);
-	ios::sync_with_stdio(false);
+	cin >> K >> N;
 
-	vector<int> vec;
-	int k, n;
-	cin >> k >> n;
-
-	for (int i = 0; i < k; i++)
+	for (int i = 0; i < K; i++)
 	{
-		int a;
-		cin >> a;
+		cin >> line[i];
+		if (maxi < line[i]) maxi = line[i];
+	}
+	low = 1;
+	high = maxi;
+	ans = 0;
 
-		vec.push_back(a);
+	while (low <= high)
+	{
+		mid = (low + high) / 2;
+		int cnt = 0;
+		for (int i = 0; i < K; i++)
+			cnt += line[i] / mid;
+
+		if (cnt >= N) {
+			low = mid + 1;
+			if (ans < mid) ans = mid;
+		}
+		else {// (cnt < N)
+			high = mid - 1;
+		}
 	}
 
-
-
-
-
-	return 0;
+	cout << ans;
 }
