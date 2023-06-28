@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <type_traits>
 using namespace std;
 
 typedef void (*FuncPtrWithVector)();
@@ -26,13 +27,14 @@ void Print4()
 
 int main()
 {
-
 	vector<FuncPtrWithVector> FPVector;
 
 	FPVector.push_back(Print1);
 	FPVector.push_back(Print2);
 	FPVector.push_back(Print3);
 	FPVector.push_back(Print4);
+
+	string s;
 
 	for (const auto& FPV : FPVector)
 	{
