@@ -19,5 +19,9 @@ int main()
 
 	MyFuncPtr3(3, 'c');
 
+	auto AutoFuncPtr = Test;
+
+	AutoFuncPtr(10, 20.5f, 'f');
+
 	return 0;
 }
