@@ -27,6 +27,9 @@ public:
 	{
 		cout << "Child's Function" << endl;
 	}
+
+private:
+	bool WhatSizeThisClass;
 };
 
 int main()
