@@ -29,7 +29,7 @@ public:
 	}
 
 private:
-	bool WhatSizeThisClass;
+	bool WhatSizeThisClass = true;
 };
 
 int main()
