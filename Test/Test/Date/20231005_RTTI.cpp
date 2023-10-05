@@ -8,7 +8,7 @@ class Parent
 
 class Child : public Parent
 {
-	virtual void Print() {}
+
 };
 
 class Child2 : public Parent
@@ -24,23 +24,29 @@ int main()
 	Child* C1 = dynamic_cast<Child*>(P);
 	Child* C2 = static_cast<Child*>(P);
 	Child* C3 = static_cast<Child*>(P2);
+	Child* C4 = dynamic_cast<Child*>(P2);
 
 	if (C1)
 	{
-		std::cout << "dynamic" << std::endl;
+		std::cout << "C1" << std::endl;
 	}
 
 	if (C2)
 	{
-		std::cout << "static" << std::endl;
+		std::cout << "C2" << std::endl;
 	}
 
 	if (C3)
 	{
-		std::cout << "dynamic2" << std::endl;
+		std::cout << "C3" << std::endl;
 	}
 
-	std::cout << typeid(*P).name() << std::endl;
+	if (C4)
+	{
+		std::cout << "C4" << std::endl;
+	}
+
+	//std::cout << typeid(*P).name() << std::endl;
 
 	return 0;
 }
