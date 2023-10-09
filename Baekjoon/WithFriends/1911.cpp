@@ -23,7 +23,6 @@ int main()
 	vector<pair<int, int>> PoolInfo;
 	int PerfectSize = 0;
 	int NeutralSize = 0;
-	int Result = 0;
 	int N, L;
 	cin >> N >> L;
 
@@ -62,6 +61,8 @@ int main()
 						i = j - 1;
 
 						PoolInfo[j].first = NewStart + L;
+
+						break;
 					}
 				}
 			}
