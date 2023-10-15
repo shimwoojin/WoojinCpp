@@ -3,11 +3,11 @@
 #include <time.h>
 using namespace std;
 
-bool Check(const vector<int>& Board, int X)
+bool Check(const vector<int>& Board, int Y)
 {
-	for (int i = 0; i < X; i++)
+	for (int i = 0; i < Y; i++)
 	{
-		if (Board[i] == Board[X] || abs(Board[X] - Board[i]) == X - i) return false;
+		if (Board[i] == Board[Y] || abs(Board[Y] - Board[i]) == Y - i) return false;
 	}
 
 	return true;
