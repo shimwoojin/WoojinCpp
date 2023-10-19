@@ -18,7 +18,6 @@ int main()
 	ios::sync_with_stdio(false);
 
 	//15 46 시작
-	//15 49 문제 한 번 읽어봄..
 	//16 02 테스트1 -> 통과
 
 	vector<int> Lopes;
