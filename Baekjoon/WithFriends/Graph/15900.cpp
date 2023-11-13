@@ -103,7 +103,6 @@ int main()
 	int Count = 0;
 	cin >> N;
 	multimap<int, int> Tree;
-	set<int> Leafs;
 
 	for (int i = 0; i < N - 1; i++)
 	{
