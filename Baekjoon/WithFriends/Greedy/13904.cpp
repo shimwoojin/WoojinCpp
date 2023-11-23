@@ -29,21 +29,7 @@ int main()
 	{
 		pair<int, int> top = pq.top();
 
-		if (top.first != now)
-		{
-			while (!pq.empty())
-			{
-				if (pq.top().first == now)
-				{
-					pq.pop();
-				}
-				else
-				{
-					break;
-				}
-			}
-		}
-		else
+		if (top.first == now)
 		{
 			pq.pop();
 
