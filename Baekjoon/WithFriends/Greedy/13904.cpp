@@ -2,7 +2,6 @@
 #include <vector>
 #include <algorithm>
 #include <queue>
-#include <set>
 
 using namespace std;
 
@@ -16,14 +15,12 @@ int main()
 	cin >> n;
 
 	priority_queue<pair<int, int>> pq;	//day, score
-	set<int, greater<int>> days;
 
 	for (int i = 0; i < n; i++)
 	{
 		int day, score;
 		cin >> day >> score;
 		pq.push(make_pair(day, score));
-		days.insert(day);
 	}
 
 	int now = pq.top().first;
@@ -71,7 +68,7 @@ int main()
 		--now;
 	}
 
-	std::cout << total;
+	cout << total;
 
 	return 0;
 }
