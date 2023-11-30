@@ -1,41 +1,47 @@
 #include <iostream>
 #include <vector>
-#include <string>
+#include <set>
+#include <queue>
 using namespace std;
 
 int main()
 {
-	cin.tie(NULL);
-	ios::sync_with_stdio(false);
-
-	int count = 0;
-	unsigned long long h;
+	long long answer = 0;
+	set<long long> s;
+	queue<long long> q;
+	long long h;
 	int a, b, c;
-	int da, db, dc;
 	cin >> h >> a >> b >> c;
 
-	da = h / a + 1;
-	db = h / b + 1;
-	dc = h / c + 1;
+	q.push(a);
+	q.push(b);
+	q.push(c);
 
-	for (int i = 0; i < da; i++)
+	while (!q.empty())
 	{
-		for (int j = 0; j < db; j++)
+		long long front = q.front();
+		q.pop();
+		++answer;
+		
+		if (front + a <= h && s.count(front + a) < 1)
 		{
-			for (int k = 0; k < dc; k++)
-			{
-				int sum = a * i + b * j + c * k;
-
-				if (sum < h)
-				{
-					++count;
-				}
-			}
+			s.insert(front + a);
+			q.push(front + a);
+		}
+		if (front + b <= h && s.count(front + b) < 1)
+		{
+			s.insert(front + b);
+			q.push(front + b);
+		}
+		if (front + c <= h && s.count(front + c) < 1)
+		{
+			s.insert(front + c);
+			q.push(front + c);
 		}
 	}
 
 
-	cout << count << endl;
+	cout << answer << endl;
 
 	return 0;
 }
