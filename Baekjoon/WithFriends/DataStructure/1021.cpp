@@ -22,14 +22,16 @@ int main()
 		cin >> find_ele;
 		int index_gap = 0;
 
-		for (auto iter = dq.begin(); iter != dq.end(); iter++)
+		/*for (auto iter = dq.begin(); iter != dq.end(); iter++)
 		{
 			if (find_ele == *iter)
 			{
 				index_gap = iter - dq.begin();
 				break;
 			}
-		}
+		}*/
+
+		index_gap = find(dq.begin(), dq.end(), find_ele) - dq.begin();
 
 		if (index_gap > dq.size() / 2)
 		{
