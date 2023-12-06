@@ -10,6 +10,7 @@ public:
 
 	Youtuber(std::string name) : name(name) {}
 
+public:
 	void Upload()
 	{
 		OnUpload();
@@ -20,6 +21,9 @@ public:
 		}
 	}
 
+protected:
+	virtual void OnUpload() {}
+
 public:
 	void AddPublisher(OnUploadDelegate fn)
 	{
@@ -28,9 +32,6 @@ public:
 
 public:
 	std::string GetName() { return name; }
-
-protected:
-	virtual void OnUpload() {}
 
 private:
 	std::vector<OnUploadDelegate > UploadDelegate;
@@ -60,9 +61,6 @@ public:
 		youtuber->AddPublisher(GetNotify());
 	}
 
-public:
-	std::string GetName() { return name; }
-
 protected:
 	virtual Youtuber::OnUploadDelegate GetNotify()
 	{
@@ -70,6 +68,9 @@ protected:
 			std::cout << youtuber->GetName() << "님꼐서 새 동영상을 업로드하였습니다!" << std::endl;
 		};
 	}
+
+public:
+	std::string GetName() { return name; }
 
 private:
 	std::string name;
