@@ -1,11 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <functional>
 
 class Youtuber
 {
 public:
-	using OnUploadDelegate  = void(*)(Youtuber*);
+	using OnUploadDelegate  = std::function<void(Youtuber*)>;
 
 	Youtuber(std::string name) : name(name) {}
 
@@ -59,6 +60,9 @@ public:
 		youtuber->AddPublisher(GetNotify());
 	}
 
+public:
+	std::string GetName() { return name; }
+
 protected:
 	virtual Youtuber::OnUploadDelegate GetNotify()
 	{
@@ -86,17 +90,40 @@ protected:
 	}
 };
 
+class Publisher2 : public Publisher
+{
+public:
+	using Publisher::Publisher;
+
+protected:
+	virtual Youtuber::OnUploadDelegate GetNotify() override
+	{
+		return std::bind(&Publisher2::Notify_Internal, this, std::placeholders::_1);
+	}
+
+private:
+	void Notify_Internal(Youtuber* youtuber)
+	{
+		std::cout << youtuber->GetName() << "님께서 새 동영상을 업로드하였습니다" << std::endl;
+		std::cout << GetName() << "님은 메시지를 무시했습니다!" << std::endl;
+	}
+};
+
 int main()
 {
-	Youtuber_Woojin* big_youtuber = new Youtuber_Woojin("woojin");
-	Publisher1* publisher1 = new Publisher1("publisher1");
-	Publisher* publisher2 = new Publisher("publisher2");
+	Youtuber* big_youtuber = new Youtuber_Woojin("woojin");
+	Publisher* publisher1 = new Publisher("publisher1");
+	Publisher* publisher2 = new Publisher1("publisher2");
+	Publisher* publisher3 = new Publisher2("publisher3");
 
 	publisher1->SubScribe(big_youtuber);
 	publisher2->SubScribe(big_youtuber);
+	publisher3->SubScribe(big_youtuber);
 
 	big_youtuber->Upload();
 
+	delete publisher3;
+	delete publisher2;
 	delete publisher1;
 	delete big_youtuber;
 
