@@ -13,6 +13,8 @@ public:
 public:
 	void Upload()
 	{
+		//업로드에 대한 전반적인 처리, 동영상 품질 및 유료 시스템 결제 등
+		//또한 UploadDelegate(Broadcast)들에 대해 호출(Notify)하기 전에 본인의 값 세팅이 완료될 수 있게끔 순서를 보장하기도 함
 		OnUpload();
 
 		for (auto& Upload : UploadDelegate)
@@ -25,7 +27,7 @@ protected:
 	virtual void OnUpload() {}
 
 public:
-	void AddPublisher(OnUploadDelegate fn)
+	void AddSubscriber(OnUploadDelegate fn)
 	{
 		UploadDelegate.push_back(fn);
 	}
@@ -51,14 +53,14 @@ protected:
 	}
 };
 
-class Publisher
+class Subscriber
 {
 public:
-	Publisher(std::string name) : name(name) {}
+	Subscriber(std::string name) : name(name) {}
 
 	void SubScribe(Youtuber* youtuber)
 	{
-		youtuber->AddPublisher(GetNotify());
+		youtuber->AddSubscriber(GetNotify());
 	}
 
 protected:
@@ -76,10 +78,10 @@ private:
 	std::string name;
 };
 
-class Publisher1 : public Publisher
+class Subscriber1 : public Subscriber
 {
 public:
-	using Publisher::Publisher;
+	using Subscriber::Subscriber;
 
 protected:
 	virtual Youtuber::OnUploadDelegate GetNotify() override
@@ -91,15 +93,15 @@ protected:
 	}
 };
 
-class Publisher2 : public Publisher
+class Subscriber2 : public Subscriber
 {
 public:
-	using Publisher::Publisher;
+	using Subscriber::Subscriber;
 
 protected:
 	virtual Youtuber::OnUploadDelegate GetNotify() override
 	{
-		return std::bind(&Publisher2::Notify_Internal, this, std::placeholders::_1);
+		return std::bind(&Subscriber2::Notify_Internal, this, std::placeholders::_1);
 	}
 
 private:
@@ -113,19 +115,19 @@ private:
 int main()
 {
 	Youtuber* big_youtuber = new Youtuber_Woojin("woojin");
-	Publisher* publisher1 = new Publisher("publisher1");
-	Publisher* publisher2 = new Publisher1("publisher2");
-	Publisher* publisher3 = new Publisher2("publisher3");
+	Subscriber* subscriber1 = new Subscriber("subscriber1");
+	Subscriber* subscriber2 = new Subscriber1("subscriber2");
+	Subscriber* subscriber3 = new Subscriber2("subscriber3");
 
-	publisher1->SubScribe(big_youtuber);
-	publisher2->SubScribe(big_youtuber);
-	publisher3->SubScribe(big_youtuber);
+	subscriber1->SubScribe(big_youtuber);
+	subscriber2->SubScribe(big_youtuber);
+	subscriber3->SubScribe(big_youtuber);
 
 	big_youtuber->Upload();
 
-	delete publisher3;
-	delete publisher2;
-	delete publisher1;
+	delete subscriber3;
+	delete subscriber2;
+	delete subscriber1;
 	delete big_youtuber;
 
 	return 0;
