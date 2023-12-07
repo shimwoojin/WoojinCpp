@@ -1,7 +1,18 @@
-#include <algorithm>
-#include <numeric>
+//#include <numeric>
 
 using namespace std;
+
+template<typename T>
+T gcd(T a, T b)
+{
+    while (b != 0)
+    {
+        T temp = a % b;
+        a = b;
+        b = temp;
+    }
+    return a;
+}
 
 long long solution(int w, int h) {
     long long answer = (long long)w * h;
