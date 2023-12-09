@@ -1,13 +1,5 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <math.h>
-#include <stack>
-#include <queue>
-#include <algorithm>
-#include <cstring>
-#include <set>
-#include <map>
+#include <bits/stdc++.h>
+
 using namespace std;
 
 typedef long long ll;
@@ -18,33 +10,87 @@ int main()
 	ios::sync_with_stdio(false);
 
 	int n, m, b;
+	int max = 0;
+	int min = 256;
 	cin >> n >> m >> b;
 
-	vector<vector<int>> vec(n, vector<int>(m));
+	vector<int> vec(n * m, 0);
+	vector<pair<int, int>> results;
 
-	int min = 300, max = 0;
-
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n * m; i++)
 	{
-		for (int j = 0; j < m; j++)
+		cin >> vec[i];
+
+		max = std::max(max, vec[i]);
+		min = std::min(min, vec[i]);
+	}
+
+	sort(vec.rbegin(), vec.rend());
+
+	for (int i = max; i >= min; i--)
+	{
+		int height = i;
+		int blocks = b;
+		int time = 0;
+		int bSuccess = true;
+
+		for (int v : vec)
 		{
-			int a;
-			cin >> a;
+			if (v > height)
+			{
+				time += ((v - height) * 2);
+				blocks += (v - height);
+			}
+			else if(v == height)
+			{
+				continue;
+			}
+			else
+			{
+				int need_block = height - v;
+				
+				if (blocks >= need_block)
+				{
+					blocks -= need_block;
+					time += need_block;
+				}
+				else
+				{
+					bSuccess = false;
+					break;
+				}
+			}
+		}
 
-			max = std::max(max, a);
-			min = std::min(min, a);
-
-			vec[i][j] = a;
+		if (bSuccess)
+		{
+			results.push_back(make_pair(time, height));
 		}
 	}
 
-	//시간이 최소
-	//시간이 같다면 땅 높이가 높은 것
+	sort(results.begin(), results.end(), [](pair<int, int> a, pair<int, int> b) {
+		if (a.first < b.first)
+		{
+			return true;
+		}
+		else if (a.first == b.first)
+		{
+			if (a.second < b.second)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+		else
+		{
+			return false;
+		}
+		});
 
-	//제거 : 2초, 쌓는 건 1초
-
-
-
+	cout << results[0].first << " " << results[0].second;
 
 	return 0;
 }

@@ -27,7 +27,16 @@ int main()
 
 	for (int i = 0; i < n; i++)
 	{
-		result += ((ll)str[i] - 96) * pow(31, i);
+		ll c = ((ll)str[i] - 'a' + 1);
+
+		for (int j = 0; j < i; j++)
+		{
+			c *= 31;
+			c %= 1234567891;
+		}
+
+		result += c;
+		result %= 1234567891;
 	}
 
 	cout << result;
