@@ -65,6 +65,7 @@ int main()
 
 	CallableTest(FnPtr);
 	CallableTest(FnPtr2);
+	CallableTest(FunctorTest());
 
 	return 0;
 }
