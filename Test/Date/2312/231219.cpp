@@ -1,6 +1,7 @@
 #include <iostream>
 #include <functional>
 #include <typeinfo>
+#include <algorithm>
 
 void Hello()
 {
@@ -14,6 +15,12 @@ struct FunctorTest
 		std::cout << "FunctorTest" << std::endl;
 	}
 };
+
+template<typename Fn>
+void CallableTest(Fn fn)
+{
+	fn();
+}
 
 int main()
 {
@@ -51,6 +58,13 @@ int main()
 	cout << typeid(LambdaTest).name() << endl;
 	cout << typeid(LambdaTest2).name() << endl;
 	cout << typeid(t).name() << endl;
+
+	CallableTest([](){
+		cout << "CallableTest1" << std::endl;
+		});
+
+	CallableTest(FnPtr);
+	CallableTest(FnPtr2);
 
 	return 0;
 }
