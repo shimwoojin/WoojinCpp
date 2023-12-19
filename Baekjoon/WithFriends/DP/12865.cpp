@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//308ms
 int main()
 {
 	//start : 12:30
@@ -58,3 +59,45 @@ int main()
 
 	return 0;
 }
+
+//시간 줄이기
+
+//int dp[100001];
+//
+// //8ms
+//int main()
+//{
+//	int n, k;
+//	int answer = 0;
+//	cin >> n >> k;
+//
+//	priority_queue<pair<int, int>> pq;
+//	
+//	for (int i = 0; i < n; i++)
+//	{
+//		int w, v;
+//		cin >> w >> v;
+//
+//		pq.push(make_pair(w, v));
+//	}
+//
+//	//무게가 무거운 물건부터 확인
+//	while (!pq.empty())
+//	{
+//		int w = pq.top().first;
+//		int v = pq.top().second;
+//		pq.pop();
+//		
+//		//핵심 로직 -> 음.. 이해가 잘 안 됨
+//		for (int i = k; i >= w; i--)
+//		{
+//			dp[i] = max(dp[i], dp[i - w] + v);
+//		}
+//	}
+//
+//	answer = dp[k];
+//
+//	cout << answer;
+//
+//	return 0;
+//}
