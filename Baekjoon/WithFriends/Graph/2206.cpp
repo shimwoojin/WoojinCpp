@@ -153,6 +153,7 @@ int bfs(const vector<string>& my_map, int n, int m)
 int main()
 {
 	//start : 12:15
+	//end : 14:10
 
 	ios::sync_with_stdio(false);
 	cin.tie(nullptr);
