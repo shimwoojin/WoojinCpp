@@ -1,23 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-constexpr pair<int, int> dirs[4] =
-{
-	{1,0}, {-1,0}, {0,-1}, {0,1}
-};
-
 int min_chicken(int n, int m, vector<pair<int, int>> chicken_houses, vector<pair<int, int>> houses)
 {
 	int answer = INT_MAX;
-	int chicken_count = chicken_houses.size();
-	vector<vector<int>> city(n + 1, vector<int>(n + 1, 0));
 	vector<bool> cases(chicken_count - m, false);
 	vector<pair<int, int>> live_chickens;
-
-	for (auto& house : houses)
-	{
-		city[house.second][house.first] = 1;
-	}
 
 	for (int i = 0; i < m; i++)
 	{
