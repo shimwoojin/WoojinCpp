@@ -4,6 +4,7 @@ using namespace std;
 int min_chicken(int n, int m, vector<pair<int, int>> chicken_houses, vector<pair<int, int>> houses)
 {
 	int answer = INT_MAX;
+	int chicken_count = chicken_houses.size();
 	vector<bool> cases(chicken_count - m, false);
 	vector<pair<int, int>> live_chickens;
 
