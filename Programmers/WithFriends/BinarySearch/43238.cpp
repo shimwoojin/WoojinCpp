@@ -8,6 +8,7 @@ long long solution(int n, vector<int> times) {
     long long answer = 0;
 
     //start:16:36
+    //end:17:10
 
     long long right = (long long)(*max_element(times.begin(), times.end())) * n;
     long long left = 0;
