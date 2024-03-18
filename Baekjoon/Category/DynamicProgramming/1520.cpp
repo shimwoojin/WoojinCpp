@@ -10,7 +10,7 @@ struct Data
 	int y;
 };
 
-int Solution(const vector<vector<int>>& path)
+int Solution(const vector<vector<int>>& path, int x, int y)
 {
 	int answer = 0;
 	stack<Data> s;
@@ -19,13 +19,17 @@ int Solution(const vector<vector<int>>& path)
 	int dx[4] = { 0, 0, -1, 1 };
 	int dy[4] = {1, -1, 0, 0};
 
-	s.push({0, 0});
+	s.push({x, y});
 	dp[0][0] = 1;
 
 	while (s.empty() == false)
 	{
+		vector<Data> temp1;
+		vector<Data> temp2;
 		Data top = s.top();
 		s.pop();
+
+		if (top.y == 0 && top.x == 0) continue;
 
 		for (int i = 0; i < 4; i++)
 		{
@@ -36,17 +40,46 @@ int Solution(const vector<vector<int>>& path)
 			{
 				if (path[ny][nx] > path[top.y][top.x])
 				{
-
+					if (dp[ny][nx] == -1)
+					{
+						temp1.push_back({nx, ny});
+					}
+					else
+					{
+						temp2.push_back({nx, ny});
+					}
 				}
+			}
+		}
+
+		if (temp1.empty())
+		{
+			dp[top.y][top.x] = 0;
+
+			for (auto ele : temp2)
+			{
+				dp[top.y][top.x] += dp[ele.y][ele.x];
+			}
+		}
+		else
+		{
+			s.push(top);
+			for (auto ele : temp1)
+			{
+				s.push({ele.x, ele.y});
 			}
 		}
 	}
 
+	answer = dp[y][x];
 	return answer;
 }
 
 int main()
 {
+	cin.tie(nullptr);
+	ios::sync_with_stdio(false);
+
 	int m, n;
 	cin >> m >> n;
 	vector<vector<int>> path(m, vector<int>(n, 0));
@@ -59,7 +92,7 @@ int main()
 		}
 	}
 
-	cout << Solution(path);
+	cout << Solution(path, n - 1, m - 1);
 
 	return 0;
 }
