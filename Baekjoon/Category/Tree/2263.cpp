@@ -12,37 +12,42 @@ struct Node
 class Tree
 {
 public:
-	Tree(int data)
+	Tree(vector<int>&& inorders, vector<int>&& postorders)
 	{
-		root = new Node{ data, nullptr, nullptr };
+		this->inorders = inorders;
+		this->postorders = postorders;
+		root = new Node{ this->postorders.back(), nullptr, nullptr};
 	}
 
-	void ParseTree(const vector<int>& inorders, const vector<int>& postorders)
+	void ParseTree()
 	{
 		int data = root->data;
 		int start = 0, end = inorders.size() - 1;
 
-		Recur(start, end, data, inorders, postorders, &root);
+		Recur(start, end, start, end, &root);
 	}
 
-	void Recur(int start, int end, int data, const vector<int>& inorders, const vector<int>& postorders, Node** current)
+	void Recur(int in_start, int in_end, int post_start, int post_end, Node** current)
 	{
-		if (start >= end || *current == nullptr) return;
+		if (in_start > in_end || *current == nullptr) return;
 
-		int index = FindData(start, end, data, inorders);
+		int data = postorders[post_end];
+		int index = FindData(in_start, in_end, data, inorders);
+		int left_size = index - in_start;
+		(*current)->data = data;
 
 		if (index != -1)
 		{
-			if (index - start > 0)
+			if (index - in_start > 0)
 			{
-				(*current)->left = new Node{ postorders[index - 1], nullptr, nullptr };
-				Recur(start, index - 1, postorders[index - 1], inorders, postorders, &(*current)->left);
+				(*current)->left = new Node{ 0, nullptr, nullptr };
+				Recur(in_start, index - 1, post_start, post_start + left_size - 1, &(*current)->left);
 			}
 
-			if (end - index > 0)
+			if (in_end - index > 0)
 			{
-				(*current)->right = new Node{ postorders[end - 1], nullptr, nullptr };
-				Recur(index + 1, end, postorders[end - 1], inorders, postorders, &(*current)->right);
+				(*current)->right = new Node{ 0, nullptr, nullptr };
+				Recur(index + 1, in_end, post_start + left_size, post_end - 1, &(*current)->right);
 			}
 		}
 	}
@@ -70,6 +75,8 @@ public:
 
 public:
 	Node* root;
+	vector<int> inorders;
+	vector<int> postorders;
 };
 
 int main()
@@ -93,10 +100,61 @@ int main()
 		cin >> postorders[i];
 	}
 
-	Tree tree(postorders.back());
+	Tree tree(move(inorders), move(postorders));
 
-	tree.ParseTree(inorders, postorders);
+	tree.ParseTree();
 	tree.PrintPreOrder(tree.root);
 
 	return 0;
 }
+
+//#include <iostream>
+//
+//using namespace std;
+//
+//int Index[100001];
+//int inorder[100001];
+//int postorder[100001];
+//int n;
+//
+//// 입력 받기
+//void input()
+//{
+//	ios_base::sync_with_stdio(false);
+//	cin.tie(NULL);
+//	cout.tie(NULL);
+//
+//	cin >> n;
+//	for (int i = 1; i <= n; i++)
+//	{
+//		cin >> inorder[i];
+//		Index[inorder[i]] = i; // inorder 요소들의 Index 정보 저장
+//	}
+//	for (int i = 1; i <= n; i++)
+//		cin >> postorder[i];
+//}
+//
+//// preorder 를 출력하는 함수 (재귀)
+//void getPreOrder(int inStart, int inEnd, int postStart, int postEnd)
+//{
+//	// 더 이상 분할 할 수 없는 경우 return
+//	if (inStart > inEnd || postStart > postEnd)
+//		return;
+//	// postorder의 끝 값이 root값
+//	// Index 배열을 통해 inorder에서의 root index를 쉽게 구할 수 있다.
+//	int rootIndex = Index[postorder[postEnd]];
+//	int leftSize = rootIndex - inStart;
+//	int rightSize = inEnd - rootIndex;
+//	cout << inorder[rootIndex] << ' '; // root 값 출력
+//
+//	// 재귀 함수 호출
+//	getPreOrder(inStart, rootIndex - 1, postStart, postStart + leftSize - 1);
+//	getPreOrder(rootIndex + 1, inEnd, postStart + leftSize, postEnd - 1);
+//}
+//
+//int main()
+//{
+//	input();
+//	getPreOrder(1, n, 1, n);
+//	return 0;
+//}
