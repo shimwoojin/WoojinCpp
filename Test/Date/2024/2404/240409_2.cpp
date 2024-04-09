@@ -5,6 +5,27 @@
 #include <numeric>
 #include <random>
 
+//void Test(int val)
+//{
+//	std::cout << "N" << '\n';
+//}
+
+void Test(int& val)
+{
+	std::cout << "L" << '\n';
+}
+
+void Test(int&& val)
+{
+	std::cout << "R" << '\n';
+}
+
+template <typename T>
+void Wrapper(T&& t)
+{
+	Test(std::forward<T>(t));
+}
+
 int main()
 {
 	std::list<int> l(10);
@@ -37,6 +58,9 @@ int main()
 	std::exchange(vec3, { 1,2,3,4,5 });
 
 	std::move(vec.begin(), vec.end(), vec.begin());
+
+	Wrapper(e);
+	Wrapper(3);
 
 	return 0;
 }
